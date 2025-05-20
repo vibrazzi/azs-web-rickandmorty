@@ -257,6 +257,17 @@ button:hover, .episode-card .actions button:hover {
   border-color: var(--color-primary);
 }
 
+.background-container {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/bg-rick.jpg') no-repeat center center;
+  background-size: cover;
+  z-index: -1;
+  pointer-events: none;
+}
+
 @media (max-width: 900px) {
   #root {
     padding: 1.5rem;
