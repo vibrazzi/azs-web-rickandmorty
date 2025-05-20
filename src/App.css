@@ -13,7 +13,35 @@
   --color-text-dark: #232323;
   --color-text-light: #fff;
   --font-main: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  --font-title: 'Luckiest Guy', cursive, system-ui, sans-serif;
+  --font-title: "Luckiest Guy", cursive, system-ui, sans-serif;
+}
+
+/* Padronização de fontes */
+#root,
+body,
+header,
+main,
+button,
+input,
+.episode-card,
+.character-card,
+.episode-detail-container,
+.counters,
+.actions-bar,
+.status-filters,
+nav,
+.favorites-badge {
+  font-family: var(--font-main) !important;
+}
+
+.app-title,
+h1 {
+  font-family: var(--font-title) !important;
+}
+
+h2,
+h3 {
+  font-family: var(--font-main) !important;
 }
 
 #root {
@@ -23,7 +51,7 @@
   text-align: center;
   min-height: 100vh;
   box-sizing: border-box;
-  animation: portal-in 1.2s cubic-bezier(.7,-0.2,.3,1.4);
+  animation: portal-in 1.2s cubic-bezier(0.7, -0.2, 0.3, 1.4);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,7 +69,7 @@ header {
   align-items: center;
   justify-content: center;
   background: transparent;
-  border-bottom: 2px solid rgba(255,255,255,0.10);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
   color: var(--color-text);
   font-family: var(--font-main);
 }
@@ -69,7 +97,8 @@ h1 {
   color: var(--color-secondary);
 }
 
-h2, h3 {
+h2,
+h3 {
   font-family: var(--font-main) !important;
   color: var(--color-secondary);
 }
@@ -97,7 +126,7 @@ nav button:hover {
   background: var(--color-primary);
   color: var(--color-text-dark);
   border-color: var(--color-primary);
-  box-shadow: 0 2px 12px var(--color-primary)40;
+  box-shadow: 0 2px 12px var(--color-primary) 40;
 }
 nav button:active {
   transform: scale(0.96) rotate(1deg);
@@ -187,7 +216,7 @@ main {
 
 .episode-card.favorited {
   border-color: var(--color-favorite);
-  box-shadow: 0 0 8px var(--color-favorite)55;
+  box-shadow: 0 0 8px var(--color-favorite) 55;
   animation: pop 0.3s;
 }
 
@@ -240,7 +269,8 @@ main {
   font-family: var(--font-main) !important;
 }
 
-button, .episode-card .actions button {
+button,
+.episode-card .actions button {
   transition: transform 0.15s, box-shadow 0.15s;
   font-family: var(--font-main) !important;
   border-radius: 8px;
@@ -249,9 +279,10 @@ button, .episode-card .actions button {
   color: var(--color-text);
   transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.15s;
 }
-button:hover, .episode-card .actions button:hover {
+button:hover,
+.episode-card .actions button:hover {
   transform: translateY(-2px) scale(1.06) rotate(-2deg);
-  box-shadow: 0 2px 12px var(--color-primary)40;
+  box-shadow: 0 2px 12px var(--color-primary) 40;
   background: var(--color-primary);
   color: var(--color-text-dark);
   border-color: var(--color-primary);
@@ -259,10 +290,13 @@ button:hover, .episode-card .actions button:hover {
 
 .background-container {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100vw;
   height: 100vh;
-  background: url('/bg-rick.jpg') no-repeat center center;
+  background: url("/bg-rick.jpg") no-repeat center center;
   background-size: cover;
   z-index: -1;
   pointer-events: none;
@@ -446,8 +480,11 @@ button:hover, .episode-card .actions button:hover {
 
 .loading-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.4);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -482,7 +519,9 @@ button:focus {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes portal-in {
@@ -504,14 +543,24 @@ button:focus {
 }
 
 @keyframes popular-glow {
-  0% { box-shadow: 0 0 12px 2px #b8fff9cc, 0 0 0 2px #ffd700; }
-  100% { box-shadow: 0 0 32px 8px #b8fff9cc, 0 0 0 2px #ffd700; }
+  0% {
+    box-shadow: 0 0 12px 2px #b8fff9cc, 0 0 0 2px #ffd700;
+  }
+  100% {
+    box-shadow: 0 0 32px 8px #b8fff9cc, 0 0 0 2px #ffd700;
+  }
 }
 
 @keyframes pop {
-  0% { transform: scale(1); }
-  60% { transform: scale(1.18) rotate(-6deg);}
-  100% { transform: scale(1) rotate(0);}
+  0% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.18) rotate(-6deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
 }
 
 @keyframes fade-in-card {
