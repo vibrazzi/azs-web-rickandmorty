@@ -4,6 +4,7 @@ import EpisodesList from './EpisodesList'
 import EpisodeDetail from './EpisodeDetail'
 
 function App() {
+  // Carregar favoritos e vistos do localStorage ao iniciar
   const [favorites, setFavorites] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem('favorites')) || []
@@ -22,22 +23,26 @@ function App() {
   const [selectedEpisodeId, setSelectedEpisodeId] = useState(null)
   const [showFavorites, setShowFavorites] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [statusFilter, setStatusFilter] = useState('all')
+  const [statusFilter, setStatusFilter] = useState('all') // 'all' | 'watched' | 'unwatched'
 
+  // Salvar favoritos no localStorage sempre que mudar
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites))
   }, [favorites])
 
+  // Salvar vistos no localStorage sempre que mudar
   useEffect(() => {
     localStorage.setItem('watched', JSON.stringify(watched))
   }, [watched])
 
+  // Favoritar/desfavoritar episódio
   const toggleFavorite = (id) => {
     setFavorites(favs =>
       favs.includes(id) ? favs.filter(f => f !== id) : [...favs, id]
     )
   }
 
+  // Marcar/desmarcar como visto
   const toggleWatched = (id) => {
     setWatched(watched =>
       watched.includes(id) ? watched.filter(w => w !== id) : [...watched, id]
@@ -57,8 +62,8 @@ function App() {
       <header>
         <h1
           style={{
-            fontFamily: "var(--font-title)",
-            color: "var(--color-secondary)",
+            fontFamily: "'Luckiest Guy', 'Comic Sans MS', cursive, sans-serif",
+            color: '#b8fff9',
             letterSpacing: '2px',
             textShadow: '2px 4px 4px #000, 0 0 16px #b8fff9cc',
             fontSize: '2em',
@@ -78,13 +83,13 @@ function App() {
               <img
                 src="rick-icon.svg"
                 alt="Ícone do Rick"
-                className="rick-icon"
                 style={{
                   width: 38,
                   height: 38,
                   marginTop: 2,
                   filter: 'drop-shadow(0 0 8px #39ff14cc)'
                 }}
+                className="rick-icon"
               />
             </span>
           </span>
@@ -95,13 +100,13 @@ function App() {
               <img
                 src="morty-icon.svg"
                 alt="Ícone do Morty"
-                className="morty-icon"
                 style={{
                   width: 38,
                   height: 38,
                   marginTop: 2,
                   filter: 'drop-shadow(0 0 8px #39ff14cc)'
                 }}
+                className="morty-icon"
               />
             </span>
           </span>
@@ -141,55 +146,37 @@ function App() {
           onChange={e => setSearch(e.target.value)}
           style={{ marginBottom: 18, marginTop: 6 }}
         />
-        <nav style={{ marginBottom: 0, display: 'flex', gap: 8, justifyContent: 'center', flexDirection: 'row' }}>
+        <nav>
           <button
             onClick={() => setShowFavorites(false)}
-            className={!showFavorites ? 'active' : ''}
-            disabled={!showFavorites}
+            style={{ fontWeight: !showFavorites ? 'bold' : 'normal' }}
           >
-            Episódios
+            Todos Episódios
           </button>
           <button
             onClick={() => setShowFavorites(true)}
-            className={showFavorites ? 'active' : ''}
-            disabled={showFavorites || favorites.length === 0}
-            title={favorites.length === 0 ? 'Nenhum favorito' : undefined}
+            style={{ fontWeight: showFavorites ? 'bold' : 'normal' }}
           >
             Favoritos
-            {favorites.length > 0 && (
-              <span style={{
-                background: 'var(--color-favorite-bg)',
-                color: 'var(--color-text-dark)',
-                borderRadius: '50%',
-                fontSize: 13,
-                fontWeight: 'bold',
-                padding: '2px 7px',
-                marginLeft: 8,
-                position: 'relative',
-                top: -2
-              }}>
-                {favorites.length}
-              </span>
-            )}
           </button>
         </nav>
         {!showFavorites && (
-          <div style={{ margin: '8px 0 0 0', display: 'flex', gap: 8, justifyContent: 'center' }}>
+          <div style={{ margin: '8px 0', display: 'flex', gap: 8, justifyContent: 'center' }}>
             <button
               onClick={() => setStatusFilter('all')}
-              className={statusFilter === 'all' ? 'active' : ''}
+              style={{ fontWeight: statusFilter === 'all' ? 'bold' : 'normal' }}
             >
-              Todos status
+              Todos
             </button>
             <button
               onClick={() => setStatusFilter('watched')}
-              className={statusFilter === 'watched' ? 'active' : ''}
+              style={{ fontWeight: statusFilter === 'watched' ? 'bold' : 'normal' }}
             >
               Vistos
             </button>
             <button
               onClick={() => setStatusFilter('unwatched')}
-              className={statusFilter === 'unwatched' ? 'active' : ''}
+              style={{ fontWeight: statusFilter === 'unwatched' ? 'bold' : 'normal' }}
             >
               Não vistos
             </button>

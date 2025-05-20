@@ -13,7 +13,7 @@
   --color-text-dark: #232323;
   --color-text-light: #fff;
   --font-main: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  --font-title: 'Luckiest Guy', 'Comic Sans MS', cursive, sans-serif;
+  --font-title: 'Luckiest Guy', cursive, system-ui, sans-serif;
 }
 
 #root {
@@ -29,8 +29,6 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-main);
-  background-color: transparent;
-  border: 2px solid rgba(6, 255, 2, 0.267);
   color: var(--color-text);
 }
 
@@ -59,14 +57,20 @@ header input[type="text"] {
   max-width: 90vw;
   outline: none;
   box-sizing: border-box;
+  font-family: var(--font-main) !important;
 }
 header input[type="text"]:focus {
   border-color: #ffd700;
   box-shadow: 0 0 0 2px #ffd70044;
 }
 
-h1, h2, h3 {
-  font-family: var(--font-title);
+h1 {
+  font-family: var(--font-title) !important;
+  color: var(--color-secondary);
+}
+
+h2, h3 {
+  font-family: var(--font-main) !important;
   color: var(--color-secondary);
 }
 
@@ -77,6 +81,7 @@ nav {
   justify-content: center;
   gap: 1.5em;
   flex-wrap: wrap;
+  font-family: var(--font-main) !important;
 }
 
 nav button {
@@ -121,6 +126,7 @@ main {
   box-sizing: border-box;
   padding-top: 1.5rem;
   padding-bottom: 2rem;
+  font-family: var(--font-main) !important;
 }
 
 .episode-card {
@@ -143,6 +149,7 @@ main {
   animation-delay: var(--card-delay, 0ms);
   margin-left: auto;
   margin-right: auto;
+  font-family: var(--font-main) !important;
 }
 .episode-card.hidden {
   opacity: 0;
@@ -193,6 +200,7 @@ main {
   box-sizing: border-box;
   margin-top: 18px;
   margin-bottom: 18px;
+  font-family: var(--font-main) !important;
 }
 
 .character-card {
@@ -207,6 +215,7 @@ main {
   opacity: 0;
   transform: translateY(16px) scale(0.98);
   animation: fade-in-card 0.5s forwards;
+  font-family: var(--font-main) !important;
 }
 
 .character-card img {
@@ -228,11 +237,12 @@ main {
   box-shadow: 0 2px 16px #0005;
   margin-left: auto;
   margin-right: auto;
+  font-family: var(--font-main) !important;
 }
 
 button, .episode-card .actions button {
   transition: transform 0.15s, box-shadow 0.15s;
-  font-family: var(--font-main);
+  font-family: var(--font-main) !important;
   border-radius: 8px;
   border: 1.5px solid var(--color-primary-dark);
   background: var(--color-primary-dark);
