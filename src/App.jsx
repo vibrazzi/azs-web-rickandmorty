@@ -111,15 +111,15 @@ function App() {
             </span>
           </span>
         </h1>
-        <div style={{ marginBottom: 12, fontSize: '1.1em' }}>
-          <span style={{ marginRight: 16 }}>
+        <div style={{ marginBottom: 18, fontSize: '1.1em', display: 'flex', gap: 24, justifyContent: 'center' }}>
+          <span style={{ marginRight: 24 }}>
             ⭐ Favoritos: <strong>{favorites.length}</strong>
           </span>
           <span>
             👁️ Vistos: <strong>{watched.length}</strong>
           </span>
         </div>
-        <div style={{ marginBottom: 12, display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div style={{ marginBottom: 18, display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
           <button
             onClick={() => {
               if (window.confirm('Tem certeza que deseja limpar todos os favoritos e vistos?')) {
@@ -133,7 +133,7 @@ function App() {
               border: 'none',
               marginTop: 4,
               marginBottom: 8,
-              padding: '0.4em 1em'
+              padding: '0.6em 1.4em'
             }}
           >
             Limpar favoritos e vistos
@@ -144,6 +144,7 @@ function App() {
           placeholder="Buscar episódio pelo nome..."
           value={search}
           onChange={e => setSearch(e.target.value)}
+          style={{ marginBottom: 18, marginTop: 6 }}
         />
         <nav>
           <button
@@ -183,6 +184,7 @@ function App() {
         )}
       </header>
       <main>
+        <div style={{ marginTop: 18 }} />
         {selectedEpisodeId ? (
           <EpisodeDetail
             episodeId={selectedEpisodeId}
