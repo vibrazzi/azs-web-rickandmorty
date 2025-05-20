@@ -35,31 +35,45 @@ function EpisodeDetail({
   if (!data?.episode) return <p>Episódio não encontrado.</p>
 
   const ep = data.episode
+  const isFavorite = favorites.includes(ep.id)
+  const isWatched = watched.includes(ep.id)
 
   return (
     <div>
       <button onClick={onBack} style={{ marginBottom: 16 }}>Voltar</button>
-      <h2>{ep.episode} - {ep.name}</h2>
+      <h2>
+        {ep.episode} - {ep.name}
+        {isFavorite && (
+          <span title="Favorito" style={{ marginLeft: 10, color: '#ffd700', fontSize: 28, verticalAlign: 'middle' }}>★</span>
+        )}
+        {isWatched && (
+          <span title="Visto" style={{ marginLeft: 10, color: '#4caf50', fontSize: 22, verticalAlign: 'middle' }}>👁️</span>
+        )}
+      </h2>
       <div>Data: {ep.air_date}</div>
       <div style={{ margin: '12px 0' }}>
         <button
+          aria-label={isFavorite ? 'Desfavoritar episódio' : 'Favoritar episódio'}
+          title={isFavorite ? 'Desfavoritar episódio' : 'Favoritar episódio'}
           onClick={() => onToggleFavorite && onToggleFavorite(ep.id)}
           style={{
             marginRight: 8,
-            background: favorites.includes(ep.id) ? '#ffd700' : undefined,
-            color: favorites.includes(ep.id) ? '#333' : undefined
+            background: isFavorite ? '#ffd700' : undefined,
+            color: isFavorite ? '#333' : undefined
           }}
         >
-          {favorites.includes(ep.id) ? 'Desfavoritar' : 'Favoritar'}
+          {isFavorite ? 'Desfavoritar' : 'Favoritar'}
         </button>
         <button
+          aria-label={isWatched ? 'Marcar como não visto' : 'Marcar como visto'}
+          title={isWatched ? 'Marcar como não visto' : 'Marcar como visto'}
           onClick={() => onToggleWatched && onToggleWatched(ep.id)}
           style={{
-            background: watched.includes(ep.id) ? '#4caf50' : undefined,
-            color: watched.includes(ep.id) ? '#fff' : undefined
+            background: isWatched ? '#4caf50' : undefined,
+            color: isWatched ? '#fff' : undefined
           }}
         >
-          {watched.includes(ep.id) ? 'Visto' : 'Marcar como visto'}
+          {isWatched ? 'Visto' : 'Marcar como visto'}
         </button>
       </div>
       <h3>Personagens</h3>

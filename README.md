@@ -1,12 +1,36 @@
-# React + Vite
+# AZShip - Rick and Morty Episódios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação React para listar, buscar, favoritar e marcar como visto episódios de Rick and Morty, consumindo a API GraphQL oficial.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Listagem paginada de episódios
+- Busca de episódios por nome
+- Visualização de detalhes do episódio e personagens
+- Favoritar/desfavoritar episódios
+- Marcar/desmarcar episódios como vistos
+- Listagem de favoritos
+- Contador de favoritos e vistos
+- Persistência de favoritos/vistos no navegador
+- Limpar favoritos e vistos
+- Loading global elegante
 
-## Expanding the ESLint configuration
+## Como rodar o projeto
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Instale as dependências:
+   ```bash
+   npm install
+   ```
+2. Rode o projeto em modo desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+3. Acesse [http://localhost:5173](http://localhost:5173) no navegador.
+
+## API utilizada
+
+- [Rick and Morty GraphQL API](https://rickandmortyapi.com/graphql)
+
+---
+
+Projeto desenvolvido para o desafio AZShip.

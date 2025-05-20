@@ -23,6 +23,7 @@ function App() {
   const [selectedEpisodeId, setSelectedEpisodeId] = useState(null)
   const [showFavorites, setShowFavorites] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [statusFilter, setStatusFilter] = useState('all') // 'all' | 'watched' | 'unwatched'
 
   // Salvar favoritos no localStorage sempre que mudar
   useEffect(() => {
@@ -51,24 +52,9 @@ function App() {
   return (
     <>
       {isLoading && (
-        <div style={{
-          position: 'fixed',
-          top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(0,0,0,0.4)',
-          zIndex: 9999,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-          <div style={{
-            background: '#222',
-            padding: 32,
-            borderRadius: 12,
-            color: '#fff',
-            fontSize: 22,
-            fontWeight: 'bold',
-            boxShadow: '0 2px 16px #0008'
-          }}>
+        <div className="loading-overlay">
+          <div className="loading-box">
+            <span className="loading-spinner"></span>
             Carregando...
           </div>
         </div>
@@ -83,7 +69,7 @@ function App() {
             👁️ Vistos: <strong>{watched.length}</strong>
           </span>
         </div>
-        <div style={{ marginBottom: 12 }}>
+        <div style={{ marginBottom: 12, display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
           <button
             onClick={() => {
               if (window.confirm('Tem certeza que deseja limpar todos os favoritos e vistos?')) {
@@ -123,6 +109,28 @@ function App() {
             Favoritos
           </button>
         </nav>
+        {!showFavorites && (
+          <div style={{ margin: '8px 0', display: 'flex', gap: 8, justifyContent: 'center' }}>
+            <button
+              onClick={() => setStatusFilter('all')}
+              style={{ fontWeight: statusFilter === 'all' ? 'bold' : 'normal' }}
+            >
+              Todos
+            </button>
+            <button
+              onClick={() => setStatusFilter('watched')}
+              style={{ fontWeight: statusFilter === 'watched' ? 'bold' : 'normal' }}
+            >
+              Vistos
+            </button>
+            <button
+              onClick={() => setStatusFilter('unwatched')}
+              style={{ fontWeight: statusFilter === 'unwatched' ? 'bold' : 'normal' }}
+            >
+              Não vistos
+            </button>
+          </div>
+        )}
       </header>
       <main>
         {selectedEpisodeId ? (
@@ -144,6 +152,7 @@ function App() {
             onToggleWatched={toggleWatched}
             showFavorites={showFavorites}
             setIsLoading={setIsLoading}
+            statusFilter={statusFilter}
           />
         )}
       </main>
