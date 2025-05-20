@@ -3,10 +3,13 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 header {
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 header input[type="text"] {
@@ -18,6 +21,7 @@ header input[type="text"] {
   width: 300px;
   max-width: 90vw;
   outline: none;
+  box-sizing: border-box;
 }
 header input[type="text"]:focus {
   border-color: #ffd700;
@@ -30,12 +34,15 @@ nav {
   display: flex;
   justify-content: center;
   gap: 1em;
+  flex-wrap: wrap;
 }
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .episode-card {
@@ -43,17 +50,19 @@ main {
   margin: 12px;
   padding: 16px;
   border-radius: 10px;
-  background: #232323;
+  background: #232323cc;
   max-width: 400px;
   width: 100%;
   box-shadow: 0 2px 8px #0002;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s, background 0.2s;
   cursor: pointer;
   position: relative;
+  box-sizing: border-box;
+  word-break: break-word;
 }
 .episode-card:hover {
   box-shadow: 0 4px 16px #0004;
-  background: #292929;
+  background: #292929ee;
 }
 
 .episode-card .actions {
@@ -61,10 +70,11 @@ main {
   display: flex;
   gap: 8px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .episode-card.watched {
-  background: #2e2e2e;
+  background: #2e2e2ecc;
   border-color: #4caf50;
 }
 
@@ -78,6 +88,8 @@ main {
   flex-wrap: wrap;
   gap: 16px;
   justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .character-card {
@@ -85,31 +97,136 @@ main {
   border-radius: 8px;
   padding: 8px;
   width: 180px;
-  background: #222;
+  background: #222c;
   text-align: center;
+  box-sizing: border-box;
+  margin-bottom: 8px;
 }
 
 .character-card img {
   width: 100%;
   border-radius: 4px;
+  object-fit: cover;
+}
+
+.episode-detail-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #232323cc;
+  border-radius: 12px;
+  padding: 24px 32px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 16px #0005;
+}
+
+@media (max-width: 900px) {
+  #root {
+    padding: 1rem;
+  }
+  h1 {
+    font-size: 2.2em;
+  }
+  .episode-card {
+    max-width: 95vw;
+  }
+  .episode-detail-container {
+    padding: 16px 8px;
+  }
+}
+
+@media (max-width: 700px) {
+  .character-list {
+    gap: 8px;
+  }
+  .episode-card {
+    margin: 8px 0;
+    padding: 12px;
+    font-size: 0.98em;
+  }
+  .character-card {
+    width: 90vw;
+    font-size: 0.98em;
+    margin-bottom: 10px;
+  }
+  .episode-detail-container {
+    padding: 10px 2vw;
+  }
+  .character-list {
+    gap: 6px;
+  }
 }
 
 @media (max-width: 600px) {
   header input[type="text"] {
     width: 95vw;
+    font-size: 1em;
   }
   .episode-card {
     max-width: 98vw;
     padding: 10px;
-    font-size: 0.98em;
+    font-size: 0.97em;
+    margin: 8px 0;
   }
   .character-card {
-    width: 95vw;
-    font-size: 0.98em;
+    width: 98vw;
+    font-size: 0.97em;
+    margin-bottom: 8px;
   }
   .loading-box {
     font-size: 1em;
     padding: 18px;
+  }
+  nav {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+  main {
+    padding: 0;
+  }
+  header {
+    margin-bottom: 1rem;
+  }
+  .card {
+    padding: 1em;
+  }
+  .episode-detail-container {
+    padding: 6px 0;
+    border-radius: 0;
+    background: #232323ee;
+  }
+  .character-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+  .character-card {
+    width: 44vw;
+    min-width: 110px;
+    max-width: 140px;
+    font-size: 0.95em;
+    margin-bottom: 8px;
+    padding: 6px;
+  }
+  .episode-detail-container > div[style*="display: flex"] {
+    flex-direction: column !important;
+    gap: 8px !important;
+    max-width: 98vw;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.3em;
+  }
+  .episode-card,
+  .character-card {
+    font-size: 0.92em;
+    padding: 6px;
+  }
+  .episode-detail-container {
+    padding: 2px 0;
   }
 }
 

@@ -39,8 +39,8 @@ function EpisodeDetail({
   const isWatched = watched.includes(ep.id)
 
   return (
-    <div>
-      <button onClick={onBack} style={{ marginBottom: 16 }}>Voltar</button>
+    <div className="episode-detail-container">
+      <button onClick={onBack} style={{ marginBottom: 16, maxWidth: 160, width: '100%' }}>Voltar</button>
       <h2>
         {ep.episode} - {ep.name}
         {isFavorite && (
@@ -51,15 +51,28 @@ function EpisodeDetail({
         )}
       </h2>
       <div>Data: {ep.air_date}</div>
-      <div style={{ margin: '12px 0' }}>
+      <div
+        style={{
+          margin: '12px 0',
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 8,
+          justifyContent: 'center',
+          width: '100%',
+          maxWidth: 400,
+          marginLeft: 'auto',
+          marginRight: 'auto'
+        }}
+      >
         <button
           aria-label={isFavorite ? 'Desfavoritar episódio' : 'Favoritar episódio'}
           title={isFavorite ? 'Desfavoritar episódio' : 'Favoritar episódio'}
           onClick={() => onToggleFavorite && onToggleFavorite(ep.id)}
           style={{
-            marginRight: 8,
             background: isFavorite ? '#ffd700' : undefined,
-            color: isFavorite ? '#333' : undefined
+            color: isFavorite ? '#333' : undefined,
+            minWidth: 120,
+            flex: 1
           }}
         >
           {isFavorite ? 'Desfavoritar' : 'Favoritar'}
@@ -70,14 +83,16 @@ function EpisodeDetail({
           onClick={() => onToggleWatched && onToggleWatched(ep.id)}
           style={{
             background: isWatched ? '#4caf50' : undefined,
-            color: isWatched ? '#fff' : undefined
+            color: isWatched ? '#fff' : undefined,
+            minWidth: 120,
+            flex: 1
           }}
         >
           {isWatched ? 'Visto' : 'Marcar como visto'}
         </button>
       </div>
       <h3>Personagens</h3>
-      <div className="character-list">
+      <div className="character-list" style={{ width: '100%', justifyContent: 'center' }}>
         {ep.characters.map(char => (
           <div key={char.id} className="character-card">
             <img src={char.image} alt={char.name} />
