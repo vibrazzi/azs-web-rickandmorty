@@ -28,7 +28,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background:
-    url('/src/assets/bg-rick.jpg') no-repeat center center fixed;
+    url('bg-rick.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 

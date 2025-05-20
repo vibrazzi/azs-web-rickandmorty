@@ -141,7 +141,7 @@ function App() {
           onChange={e => setSearch(e.target.value)}
           style={{ marginBottom: 18, marginTop: 6 }}
         />
-        <nav style={{ marginBottom: 0, display: 'flex', gap: 8, justifyContent: 'center' }}>
+        <nav style={{ marginBottom: 0, display: 'flex', gap: 8, justifyContent: 'center', flexDirection: 'row' }}>
           <button
             onClick={() => setShowFavorites(false)}
             className={!showFavorites ? 'active' : ''}
