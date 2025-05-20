@@ -1,3 +1,21 @@
+:root {
+  --color-primary: #39ff14;
+  --color-primary-dark: #232323;
+  --color-secondary: #b8fff9;
+  --color-favorite: #ffd700;
+  --color-favorite-bg: #fffbe6;
+  --color-watched: #4caf50;
+  --color-unwatched: #b8fff9;
+  --color-bg: #242424;
+  --color-bg-card: #232323cc;
+  --color-bg-header: #232323;
+  --color-text: #b8fff9;
+  --color-text-dark: #232323;
+  --color-text-light: #fff;
+  --font-main: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-title: 'Luckiest Guy', 'Comic Sans MS', cursive, sans-serif;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -6,12 +24,24 @@
   min-height: 100vh;
   box-sizing: border-box;
   animation: portal-in 1.2s cubic-bezier(.7,-0.2,.3,1.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-main);
+  color: var(--color-text);
 }
 
 header {
   margin-bottom: 2.5rem;
   width: 100%;
   padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+  font-family: var(--font-main);
 }
 
 header input[type="text"] {
@@ -31,6 +61,11 @@ header input[type="text"]:focus {
   box-shadow: 0 0 0 2px #ffd70044;
 }
 
+h1, h2, h3 {
+  font-family: var(--font-title);
+  color: var(--color-secondary);
+}
+
 nav {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
@@ -42,15 +77,42 @@ nav {
 
 nav button {
   transition: background 0.2s, color 0.2s, transform 0.18s;
+  font-family: var(--font-main);
+  border-radius: 8px;
+  border: 1.5px solid var(--color-primary-dark);
+  background: var(--color-primary-dark);
+  color: var(--color-text);
+  transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.15s;
+}
+nav button:hover {
+  background: var(--color-primary);
+  color: var(--color-text-dark);
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 12px var(--color-primary)40;
 }
 nav button:active {
   transform: scale(0.96) rotate(1deg);
+}
+
+nav button.active,
+nav button[aria-current="page"] {
+  background: var(--color-primary);
+  color: var(--color-text-dark);
+  border-color: var(--color-primary);
+}
+
+nav button.active:nth-child(2),
+nav button[aria-current="page"]:nth-child(2) {
+  background: var(--color-favorite);
+  color: var(--color-text-dark);
+  border-color: var(--color-favorite);
 }
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   box-sizing: border-box;
   padding-top: 1.5rem;
@@ -75,6 +137,8 @@ main {
   transform: translateY(16px) scale(0.98);
   animation: fade-in-card 0.5s forwards;
   animation-delay: var(--card-delay, 0ms);
+  margin-left: auto;
+  margin-right: auto;
 }
 .episode-card.hidden {
   opacity: 0;
@@ -92,7 +156,7 @@ main {
 
 .episode-card.popular {
   border-width: 2.5px;
-  box-shadow: 0 0 24px 4px #39ff14cc, 0 0 0 2px #ffd700;
+  box-shadow: 0 0 24px 4px var(--color-primary), 0 0 0 2px var(--color-favorite);
   animation: popular-glow 1.5s infinite alternate;
 }
 
@@ -106,13 +170,13 @@ main {
 
 .episode-card.watched {
   background: #2e2e2ecc;
-  border-color: #4caf50;
+  border-color: var(--color-watched);
   animation: pop 0.3s;
 }
 
 .episode-card.favorited {
-  border-color: #ffd700;
-  box-shadow: 0 0 8px #ffd70055;
+  border-color: var(--color-favorite);
+  box-shadow: 0 0 8px var(--color-favorite)55;
   animation: pop 0.3s;
 }
 
@@ -158,14 +222,112 @@ main {
   margin-bottom: 18px;
   box-sizing: border-box;
   box-shadow: 0 2px 16px #0005;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 button, .episode-card .actions button {
   transition: transform 0.15s, box-shadow 0.15s;
+  font-family: var(--font-main);
+  border-radius: 8px;
+  border: 1.5px solid var(--color-primary-dark);
+  background: var(--color-primary-dark);
+  color: var(--color-text);
+  transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.15s;
 }
 button:hover, .episode-card .actions button:hover {
   transform: translateY(-2px) scale(1.06) rotate(-2deg);
-  box-shadow: 0 2px 12px #39ff1440;
+  box-shadow: 0 2px 12px var(--color-primary)40;
+  background: var(--color-primary);
+  color: var(--color-text-dark);
+  border-color: var(--color-primary);
+}
+
+.app-title {
+  font-family: var(--font-title);
+  color: var(--color-secondary);
+  letter-spacing: 2px;
+  text-shadow: 2px 4px 4px #000, 0 0 16px #b8fff9cc;
+  font-size: 2em;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.title-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.counters {
+  margin-bottom: 18px;
+  font-size: 1.1em;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+.actions-bar {
+  margin-bottom: 18px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.danger {
+  background: #c62828 !important;
+  color: #fff !important;
+  border: none !important;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  padding: 0.6em 1.4em;
+}
+
+.search-input {
+  margin-bottom: 18px;
+  margin-top: 6px;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  border: 1px solid #888;
+  font-size: 1em;
+  width: 300px;
+  max-width: 90vw;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.main-nav {
+  margin-bottom: 0;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.favorites-badge {
+  background: var(--color-favorite-bg);
+  color: var(--color-text-dark);
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 2px 7px;
+  margin-left: 8px;
+  position: relative;
+  top: -2px;
+}
+
+.status-filters {
+  margin: 8px 0 0 0;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
 }
 
 @media (max-width: 900px) {
@@ -290,6 +452,12 @@ button:hover, .episode-card .actions button:hover {
     width: 32px !important;
     height: 32px !important;
     margin-top: 2px !important;
+  }
+  .main-nav {
+    flex-direction: row;
+    gap: 6px;
+    width: 100%;
+    justify-content: center;
   }
 }
 
