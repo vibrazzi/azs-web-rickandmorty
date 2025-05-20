@@ -391,6 +391,8 @@ button:hover, .episode-card .actions button:hover {
     font-size: 0.97em;
     margin-bottom: 8px;
     padding: 6px;
+    font-family: var(--font-main);
+    font-weight: 400;
   }
   .loading-box {
     font-size: 1em;
