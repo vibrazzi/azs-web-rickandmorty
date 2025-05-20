@@ -5,6 +5,7 @@
   text-align: center;
   min-height: 100vh;
   box-sizing: border-box;
+  animation: portal-in 1.2s cubic-bezier(.7,-0.2,.3,1.4);
 }
 
 header {
@@ -37,6 +38,13 @@ nav {
   flex-wrap: wrap;
 }
 
+nav button {
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+}
+nav button:active {
+  transform: scale(0.96) rotate(1deg);
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -54,15 +62,34 @@ main {
   max-width: 400px;
   width: 100%;
   box-shadow: 0 2px 8px #0002;
-  transition: box-shadow 0.2s, background 0.2s;
+  transition: opacity 0.4s, box-shadow 0.2s, background 0.2s, transform 0.2s;
   cursor: pointer;
   position: relative;
   box-sizing: border-box;
   word-break: break-word;
+  opacity: 1;
+  transform: translateY(16px) scale(0.98);
+  animation: fade-in-card 0.5s forwards;
+  animation-delay: var(--card-delay, 0ms);
+}
+.episode-card.hidden {
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: opacity 0.4s, height 0.4s, margin 0.4s, padding 0.4s;
 }
 .episode-card:hover {
   box-shadow: 0 4px 16px #0004;
   background: #292929ee;
+}
+
+.episode-card.popular {
+  border-width: 2.5px;
+  box-shadow: 0 0 24px 4px #39ff14cc, 0 0 0 2px #ffd700;
+  animation: popular-glow 1.5s infinite alternate;
 }
 
 .episode-card .actions {
@@ -76,11 +103,13 @@ main {
 .episode-card.watched {
   background: #2e2e2ecc;
   border-color: #4caf50;
+  animation: pop 0.3s;
 }
 
 .episode-card.favorited {
   border-color: #ffd700;
   box-shadow: 0 0 8px #ffd70055;
+  animation: pop 0.3s;
 }
 
 .character-list {
@@ -101,6 +130,9 @@ main {
   text-align: center;
   box-sizing: border-box;
   margin-bottom: 8px;
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  animation: fade-in-card 0.5s forwards;
 }
 
 .character-card img {
@@ -118,6 +150,14 @@ main {
   padding: 24px 32px;
   box-sizing: border-box;
   box-shadow: 0 2px 16px #0005;
+}
+
+button, .episode-card .actions button {
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+button:hover, .episode-card .actions button:hover {
+  transform: translateY(-2px) scale(1.06) rotate(-2deg);
+  box-shadow: 0 2px 12px #39ff1440;
 }
 
 @media (max-width: 900px) {
@@ -214,6 +254,25 @@ main {
     gap: 8px !important;
     max-width: 98vw;
   }
+  header h1 {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    font-size: 1.3em !important;
+    gap: 0 !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+  }
+  .rick-morty-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .rick-icon,
+  .morty-icon {
+    width: 32px !important;
+    height: 32px !important;
+    margin-top: 2px !important;
+  }
 }
 
 @media (max-width: 400px) {
@@ -305,4 +364,40 @@ button:focus {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+@keyframes portal-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) rotate(-10deg);
+    filter: blur(8px);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.05) rotate(2deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+@keyframes popular-glow {
+  0% { box-shadow: 0 0 12px 2px #b8fff9cc, 0 0 0 2px #ffd700; }
+  100% { box-shadow: 0 0 32px 8px #b8fff9cc, 0 0 0 2px #ffd700; }
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  60% { transform: scale(1.18) rotate(-6deg);}
+  100% { transform: scale(1) rotate(0);}
+}
+
+@keyframes fade-in-card {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

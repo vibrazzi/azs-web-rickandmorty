@@ -60,7 +60,57 @@ function App() {
         </div>
       )}
       <header>
-        <h1>AZShip - Rick and Morty Episódios</h1>
+        <h1
+          style={{
+            fontFamily: "'Luckiest Guy', 'Comic Sans MS', cursive, sans-serif",
+            color: '#b8fff9',
+            letterSpacing: '2px',
+            textShadow: '2px 4px 4px #000, 0 0 16px #b8fff9cc',
+            fontSize: '2em',
+            marginBottom: 24,
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            gap: 0,
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            position: 'relative'
+          }}
+        >
+          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            Rick
+            <span className="rick-morty-icon-wrapper">
+              <img
+                src="rick-icon.svg"
+                alt="Ícone do Rick"
+                style={{
+                  width: 38,
+                  height: 38,
+                  marginTop: 2,
+                  filter: 'drop-shadow(0 0 8px #39ff14cc)'
+                }}
+                className="rick-icon"
+              />
+            </span>
+          </span>
+          <span style={{ margin: '0 8px' }}>and</span>
+          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            Morty
+            <span className="rick-morty-icon-wrapper">
+              <img
+                src="morty-icon.svg"
+                alt="Ícone do Morty"
+                style={{
+                  width: 38,
+                  height: 38,
+                  marginTop: 2,
+                  filter: 'drop-shadow(0 0 8px #39ff14cc)'
+                }}
+                className="morty-icon"
+              />
+            </span>
+          </span>
+        </h1>
         <div style={{ marginBottom: 12, fontSize: '1.1em' }}>
           <span style={{ marginRight: 16 }}>
             ⭐ Favoritos: <strong>{favorites.length}</strong>
