@@ -30,7 +30,7 @@ body {
   min-height: 100vh;
   background:
     linear-gradient(rgba(20,20,20,0.85), rgba(20,20,20,0.92)),
-    url('bg-rick.jpg') no-repeat center center fixed;
+    url('./bg-rick.jpg') no-repeat center center fixed;
   background-size: cover;
   backdrop-filter: blur(2px);
 }
