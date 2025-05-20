@@ -1,14 +1,37 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import EpisodesList from './EpisodesList'
 import EpisodeDetail from './EpisodeDetail'
 
 function App() {
-  const [favorites, setFavorites] = useState([])
-  const [watched, setWatched] = useState([])
+  // Carregar favoritos e vistos do localStorage ao iniciar
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('favorites')) || []
+    } catch {
+      return []
+    }
+  })
+  const [watched, setWatched] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('watched')) || []
+    } catch {
+      return []
+    }
+  })
   const [search, setSearch] = useState('')
   const [selectedEpisodeId, setSelectedEpisodeId] = useState(null)
   const [showFavorites, setShowFavorites] = useState(false)
+
+  // Salvar favoritos no localStorage sempre que mudar
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites))
+  }, [favorites])
+
+  // Salvar vistos no localStorage sempre que mudar
+  useEffect(() => {
+    localStorage.setItem('watched', JSON.stringify(watched))
+  }, [watched])
 
   // Favoritar/desfavoritar episódio
   const toggleFavorite = (id) => {
@@ -28,6 +51,14 @@ function App() {
     <>
       <header>
         <h1>AZShip - Rick and Morty Episódios</h1>
+        <div style={{ marginBottom: 12, fontSize: '1.1em' }}>
+          <span style={{ marginRight: 16 }}>
+            ⭐ Favoritos: <strong>{favorites.length}</strong>
+          </span>
+          <span>
+            👁️ Vistos: <strong>{watched.length}</strong>
+          </span>
+        </div>
         <input
           type="text"
           placeholder="Buscar episódio pelo nome..."

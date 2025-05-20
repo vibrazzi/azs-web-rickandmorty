@@ -63,10 +63,10 @@ function EpisodeDetail({
         </button>
       </div>
       <h3>Personagens</h3>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+      <div className="character-list">
         {ep.characters.map(char => (
-          <div key={char.id} style={{ border: '1px solid #444', borderRadius: 8, padding: 8, width: 180 }}>
-            <img src={char.image} alt={char.name} style={{ width: '100%', borderRadius: 4 }} />
+          <div key={char.id} className="character-card">
+            <img src={char.image} alt={char.name} />
             <div><strong>{char.name}</strong></div>
             <div>Espécie: {char.species}</div>
             <div>Status: {char.status}</div>

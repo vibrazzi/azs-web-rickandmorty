@@ -44,28 +44,19 @@ function EpisodesList({
       {episodes.map(ep => (
         <div
           key={ep.id}
-          style={{
-            border: '1px solid #444',
-            margin: 12,
-            padding: 12,
-            borderRadius: 8,
-            cursor: onSelectEpisode ? 'pointer' : 'default',
-            background: watched.includes(ep.id) ? '#2e2e2e' : undefined,
-            position: 'relative'
-          }}
+          className={`episode-card${watched.includes(ep.id) ? ' watched' : ''}`}
           onClick={onSelectEpisode ? () => onSelectEpisode(ep.id) : undefined}
         >
           <strong>{ep.episode}</strong> - {ep.name}
           <div>Data: {ep.air_date}</div>
           <div>Personagens: {ep.characters.length}</div>
-          <div style={{ marginTop: 8 }}>
+          <div className="actions">
             <button
               onClick={e => {
                 e.stopPropagation()
                 onToggleFavorite && onToggleFavorite(ep.id)
               }}
               style={{
-                marginRight: 8,
                 background: favorites.includes(ep.id) ? '#ffd700' : undefined,
                 color: favorites.includes(ep.id) ? '#333' : undefined
               }}
