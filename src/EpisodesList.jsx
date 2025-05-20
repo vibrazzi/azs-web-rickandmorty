@@ -1,8 +1,15 @@
 import { useQuery, gql } from '@apollo/client'
+import { useState, useEffect } from 'react'
 
 const GET_EPISODES = gql`
-  query GetEpisodes($name: String) {
-    episodes(filter: { name: $name }) {
+  query GetEpisodes($name: String, $page: Int) {
+    episodes(filter: { name: $name }, page: $page) {
+      info {
+        next
+        prev
+        pages
+        count
+      }
       results {
         id
         name
@@ -24,12 +31,26 @@ function EpisodesList({
   onToggleFavorite,
   onToggleWatched,
   showFavorites = false,
+  setIsLoading,
 }) {
+  const [page, setPage] = useState(1)
+
+  // Resetar para página 1 ao buscar ou alternar favoritos
+  useEffect(() => {
+    setPage(1)
+  }, [search, showFavorites])
+
   const { data, loading, error } = useQuery(GET_EPISODES, {
-    variables: { name: search || undefined },
+    variables: { name: search || undefined, page },
   })
 
-  if (loading) return <p>Carregando episódios...</p>
+  // Informar loading global ao App
+  useEffect(() => {
+    if (setIsLoading) setIsLoading(loading)
+    return () => setIsLoading && setIsLoading(false)
+  }, [loading, setIsLoading])
+
+  if (loading) return null
   if (error) return <p>Erro ao carregar episódios.</p>
   if (!data?.episodes?.results?.length) return <p>Nenhum episódio encontrado.</p>
 
@@ -78,6 +99,25 @@ function EpisodesList({
           </div>
         </div>
       ))}
+      {!showFavorites && data.episodes.info && (
+        <div style={{ margin: '24px 0', display: 'flex', gap: 12, justifyContent: 'center' }}>
+          <button
+            onClick={() => setPage(p => Math.max(1, p - 1))}
+            disabled={!data.episodes.info.prev}
+          >
+            Página anterior
+          </button>
+          <span style={{ alignSelf: 'center' }}>
+            Página {page} de {data.episodes.info.pages}
+          </span>
+          <button
+            onClick={() => setPage(p => p + 1)}
+            disabled={!data.episodes.info.next}
+          >
+            Próxima página
+          </button>
+        </div>
+      )}
     </div>
   )
 }

@@ -22,6 +22,7 @@ function App() {
   const [search, setSearch] = useState('')
   const [selectedEpisodeId, setSelectedEpisodeId] = useState(null)
   const [showFavorites, setShowFavorites] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   // Salvar favoritos no localStorage sempre que mudar
   useEffect(() => {
@@ -49,6 +50,29 @@ function App() {
 
   return (
     <>
+      {isLoading && (
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0,0,0,0.4)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <div style={{
+            background: '#222',
+            padding: 32,
+            borderRadius: 12,
+            color: '#fff',
+            fontSize: 22,
+            fontWeight: 'bold',
+            boxShadow: '0 2px 16px #0008'
+          }}>
+            Carregando...
+          </div>
+        </div>
+      )}
       <header>
         <h1>AZShip - Rick and Morty Episódios</h1>
         <div style={{ marginBottom: 12, fontSize: '1.1em' }}>
@@ -58,6 +82,26 @@ function App() {
           <span>
             👁️ Vistos: <strong>{watched.length}</strong>
           </span>
+        </div>
+        <div style={{ marginBottom: 12 }}>
+          <button
+            onClick={() => {
+              if (window.confirm('Tem certeza que deseja limpar todos os favoritos e vistos?')) {
+                setFavorites([])
+                setWatched([])
+              }
+            }}
+            style={{
+              background: '#c62828',
+              color: '#fff',
+              border: 'none',
+              marginTop: 4,
+              marginBottom: 8,
+              padding: '0.4em 1em'
+            }}
+          >
+            Limpar favoritos e vistos
+          </button>
         </div>
         <input
           type="text"
@@ -99,6 +143,7 @@ function App() {
             onToggleFavorite={toggleFavorite}
             onToggleWatched={toggleWatched}
             showFavorites={showFavorites}
+            setIsLoading={setIsLoading}
           />
         )}
       </main>
