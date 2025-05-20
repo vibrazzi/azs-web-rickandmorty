@@ -44,13 +44,6 @@ function App() {
     )
   }
 
-  const handleClear = () => {
-    if (window.confirm('Tem certeza que deseja limpar todos os favoritos e vistos?')) {
-      setFavorites([])
-      setWatched([])
-    }
-  }
-
   return (
     <>
       {isLoading && (
@@ -62,31 +55,82 @@ function App() {
         </div>
       )}
       <header>
-        <h1 className="app-title">
-          <span className="title-part">
+        <h1
+          style={{
+            fontFamily: "var(--font-title)",
+            color: "var(--color-secondary)",
+            letterSpacing: '2px',
+            textShadow: '2px 4px 4px #000, 0 0 16px #b8fff9cc',
+            fontSize: '2em',
+            marginBottom: 24,
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            gap: 0,
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            position: 'relative'
+          }}
+        >
+          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             Rick
             <span className="rick-morty-icon-wrapper">
-              <img src="rick-icon.svg" alt="Ícone do Rick" className="rick-icon" />
+              <img
+                src="rick-icon.svg"
+                alt="Ícone do Rick"
+                className="rick-icon"
+                style={{
+                  width: 38,
+                  height: 38,
+                  marginTop: 2,
+                  filter: 'drop-shadow(0 0 8px #39ff14cc)'
+                }}
+              />
             </span>
           </span>
-          <span className="and-text">and</span>
-          <span className="title-part">
+          <span style={{ margin: '0 8px' }}>and</span>
+          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             Morty
             <span className="rick-morty-icon-wrapper">
-              <img src="morty-icon.svg" alt="Ícone do Morty" className="morty-icon" />
+              <img
+                src="morty-icon.svg"
+                alt="Ícone do Morty"
+                className="morty-icon"
+                style={{
+                  width: 38,
+                  height: 38,
+                  marginTop: 2,
+                  filter: 'drop-shadow(0 0 8px #39ff14cc)'
+                }}
+              />
             </span>
           </span>
         </h1>
-        <div className="counters">
-          <span>
+        <div style={{ marginBottom: 18, fontSize: '1.1em', display: 'flex', gap: 24, justifyContent: 'center' }}>
+          <span style={{ marginRight: 24 }}>
             ⭐ Favoritos: <strong>{favorites.length}</strong>
           </span>
           <span>
             👁️ Vistos: <strong>{watched.length}</strong>
           </span>
         </div>
-        <div className="actions-bar">
-          <button onClick={handleClear} className="danger">
+        <div style={{ marginBottom: 18, display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <button
+            onClick={() => {
+              if (window.confirm('Tem certeza que deseja limpar todos os favoritos e vistos?')) {
+                setFavorites([])
+                setWatched([])
+              }
+            }}
+            style={{
+              background: '#c62828',
+              color: '#fff',
+              border: 'none',
+              marginTop: 4,
+              marginBottom: 8,
+              padding: '0.6em 1.4em'
+            }}
+          >
             Limpar favoritos e vistos
           </button>
         </div>
@@ -95,9 +139,9 @@ function App() {
           placeholder="Buscar episódio pelo nome..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="search-input"
+          style={{ marginBottom: 18, marginTop: 6 }}
         />
-        <nav className="main-nav">
+        <nav style={{ marginBottom: 0, display: 'flex', gap: 8, justifyContent: 'center' }}>
           <button
             onClick={() => setShowFavorites(false)}
             className={!showFavorites ? 'active' : ''}
@@ -113,12 +157,24 @@ function App() {
           >
             Favoritos
             {favorites.length > 0 && (
-              <span className="favorites-badge">{favorites.length}</span>
+              <span style={{
+                background: 'var(--color-favorite-bg)',
+                color: 'var(--color-text-dark)',
+                borderRadius: '50%',
+                fontSize: 13,
+                fontWeight: 'bold',
+                padding: '2px 7px',
+                marginLeft: 8,
+                position: 'relative',
+                top: -2
+              }}>
+                {favorites.length}
+              </span>
             )}
           </button>
         </nav>
         {!showFavorites && (
-          <div className="status-filters">
+          <div style={{ margin: '8px 0 0 0', display: 'flex', gap: 8, justifyContent: 'center' }}>
             <button
               onClick={() => setStatusFilter('all')}
               className={statusFilter === 'all' ? 'active' : ''}
@@ -141,7 +197,7 @@ function App() {
         )}
       </header>
       <main>
-        <div className="main-spacer" />
+        <div style={{ marginTop: 18 }} />
         {selectedEpisodeId ? (
           <EpisodeDetail
             episodeId={selectedEpisodeId}

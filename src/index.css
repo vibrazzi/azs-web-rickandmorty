@@ -5,7 +5,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -29,10 +28,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background:
-    linear-gradient(rgba(20,20,20,0.85), rgba(20,20,20,0.92)),
     url('/src/assets/bg-rick.jpg') no-repeat center center fixed;
   background-size: cover;
-  backdrop-filter: blur(2px);
 }
 
 h1 {
@@ -61,7 +58,6 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
     background-color: #ffffff;
   }
   a:hover {
